@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khuyến Mãi</title>
+    <!--bootstrap CDN-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <!--icon bootstrap-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!--font awesome icon-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <!--Google font--> <!--Lấy font online-->
+    <link href="https://fonts.googleapis.com/css2?family=Sedgwick+Ave&display=swap" rel="stylesheet">
+    <!--hiệu ứng xuất hiện-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <style>
+        @font-face {
+            font-family: BarlowCondensed-Light;
+            src: url(./font/BarlowCondensed-Light.ttf);
+        }
+
+        /* thanh thông báo */
+        .thongbao {
+            margin-bottom: 0px;
+            text-align: center;
+            background-color: rgb(35, 33, 30);
+            padding: 10px;
+            color: white;
+            font-size: 14px;
+        }
+
+        /* navbar */
+        .navbar {
+            background-color: rgb(250, 245, 237);
+        }
+
+        /* SP */
+        .SP1 {
+            margin-top: 40px;
+        }
+
+        .d-flex .c1 {
+            font-size: 50px;
+            font-weight: 700;
+            font-family: BarlowCondensed-Light;
+            color: rgb(84, 55, 35);
+        }
+
+        .d-flex .c2 {
+            font-size: 40px;
+            font-weight: 500;
+            line-height: 50px;
+            font-family: BarlowCondensed-Light;
+            color: rgb(84, 55, 35);
+        }
+
+        .d-flex .c3 {
+            font-size: 20px;
+        }
+
+        .d-flex .p-5 {
+            margin-top: 30px;
+        }
+
+        /* button carousel */
+        .d-flex .c4 {
+            padding: 1.7em 12em;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            font-weight: 500;
+            color: #000;
+            background-color: #fff;
+            border: none;
+            border-radius: 45px;
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease 0s;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .d-flex .p-5 button:hover {
+            background-color: rgb(84, 55, 35);
+            box-shadow: 0px 15px 20px rgb(84, 55, 35);
+            color: #fff;
+            transform: translateY(-7px);
+        }
+
+        /* footer */
+        footer {
+            background-color: rgb(35, 33, 30);
+            color: rgb(220, 198, 128);
+            padding: 35px;
+            font-size: 15px;
+        }
+    </style>
+</head>
+
+<body style="background-color: rgb(250, 245, 237);">
+    <a name="MinhNguyen"></a> <!--tạo 1 liên kết rỗng, tạo tên, để bấm vào máy bay trang cuộn lên đây-->
+    <!--Thanh Thông Báo-->
+    <p class="thongbao">Tận hưởng giao hàng miễn phí toàn quốc với hóa đơn từ 99.000đ <i
+            class="fa-solid fa-truck-fast ms-2"></i> </p>
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg p-3">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><img src="https://apea.asia/wp-content/uploads/2021/11/cocoon-logo-ib2.png"
+                    width="130px" alt=""></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="Index.html">Trang Chủ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="SanPham.html">Sản Phẩm</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="ThuongHieu.html">Cam Kết</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="KhuyenMai.html">Khuyến Mãi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="DangNhap.html"><i class="fa-solid fa-user"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Sắc Hoa Xuân -->
+    <img src="https://image.cocoonvietnam.com/uploads/Website_PC_02a7ebcffe.jpg" width="100%" alt="">
+    <hr class="p-0 m-0">
+    <!-- SP -->
+    <!-- 1 -->
+    <div class="SP1 container">
+        <div class="d-flex">
+            <div>
+                <img src="https://image.cocoonvietnam.com/uploads/THUMBNAILS_WEB_08_987432f372.png" width="85%" alt="">
+            </div>
+            <div class="p-5">
+                <p class="c1">Nước Tẩy Trang Bí Đao</p>
+                <p class="c2">295.000đ <s>610.000đ</s> </p>
+                <p class="c3 mt-5"><b>Mua</b> Nước Tẩy Trang Bí Đao 500ml <b>295K</b> <br>
+                    <b>Tặng</b> 3 Nước Tẩy Trang Bí Đao 50ml + 1 Gel Bí Đao Rửa Mặt 50ml + 1 Nước Sen Hậu Giang 50ml
+                    (tổng trị giá
+                    <b>315K</b>)
+                </p>
+                <button class="c4 mt-2"
+                    onclick="window.open('https:/cocoonvietnam.com/khuyen-mai/duong-thot-not-an-giang-lam-sach-da-chet-co-the-1');">
+                    Mua Ngay <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+        </div>
+    </div>
+    <!-- 2 -->
+    <div class="SP1 container">
+        <div class="d-flex">
+            <div class="p-5">
+                <p class="c1">Tinh Chất Bí Đao N7</p>
+                <p class="c2">295.000đ <s>510.000đ</s> </p>
+                <p class="c3 mt-5"><b>Mua</b> Tinh Chất Bí Đao N7 70ml <b>295K</b> <br>
+                    <b>Tặng</b> 3 Nước Tẩy Trang Bí Đao 50ml + 1 Gel Bí Đao Rửa Mặt 50ml + 1 Nước Sen Hậu Giang 50ml
+                    (tổng trị giá
+                    <b>315K</b>)
+                </p>
+                <button class="c4 mt-2"
+                    onclick="window.open('https:/cocoonvietnam.com/khuyen-mai/duong-thot-not-an-giang-lam-sach-da-chet-co-the-1');">
+                    Mua Ngay <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+            <div>
+                <img src="https://image.cocoonvietnam.com/uploads/THUMBNAILS_WEB_11_0603010092.png" width="85%" alt="">
+            </div>
+        </div>
+    </div>
+    <!-- 3 -->
+    <div class="SP1 container">
+        <div class="d-flex">
+            <div>
+                <img src="https://image.cocoonvietnam.com/uploads/THUMBNAILS_WEB_09_2a5e2b2c3d.png" width="85%" alt="">
+            </div>
+            <div class="p-5">
+                <p class="c1">Nước Sen Hậu Giang 210ml</p>
+                <p class="c2">295.000đ <s>610.000đ</s> </p>
+                <p class="c3 mt-5"><b>Mua</b> Nước Tẩy Trang Bí Đao 500ml <b>295K</b> <br>
+                    <b>Tặng</b> 3 Nước Tẩy Trang Bí Đao 50ml + 1 Gel Bí Đao Rửa Mặt 50ml + 1 Nước Sen Hậu Giang 50ml
+                    (tổng trị giá
+                    <b>315K</b>)
+                </p>
+                <button class="c4 mt-2"
+                    onclick="window.open('https:/cocoonvietnam.com/khuyen-mai/duong-thot-not-an-giang-lam-sach-da-chet-co-the-1');">
+                    Mua Ngay <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+        </div>
+    </div>
+    <!-- 4 -->
+    <div class="SP1 container">
+        <div class="d-flex">
+            <div class="p-5">
+                <p class="c1">Thạch Nghệ Hưng Yên 30ml</p>
+                <p class="c2">195.000đ <s>400.000đ</s> </p>
+                <p class="c3 mt-5"><b>Mua</b> Thạch Nghệ Hưng Yên 30ml <b>195K</b> <br>
+                    <b>Tặng</b> 1 Nước Sen Hậu Giang 140ml + 1 Gel Bí Đao Rửa Mặt 50ml + 1 Nước Tẩy Trang Bí Đao 50ml
+                    (tổng trị giá
+                    <b>315K</b>)
+                </p>
+                <button class="c4 mt-2"
+                    onclick="window.open('https:/cocoonvietnam.com/khuyen-mai/duong-thot-not-an-giang-lam-sach-da-chet-co-the-1');">
+                    Mua Ngay <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+            <div>
+                <img src="https://image.cocoonvietnam.com/uploads/THUMBNAILS_WEB_20_c4e81daff5.png" width="85%" alt="">
+            </div>
+        </div>
+    </div>
+    <!--icon (nút để bấm vào cuộn về đầu trang)-->
+    <a href="#MinhNguyen" style="position: fixed; right: 11px; bottom: 11px;">
+        <!--fixed: cố định 1 chỗ, lướt đâu cũng y nguyên đó-->
+        <i style="color: rgb(113, 86, 68);" class="fa-solid fa-circle-arrow-up fa-2x"></i>
+    </a>
+    <!-- footer -->
+    <footer>
+        <div class="d-flex">
+            <div>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d62699.18617585225!2d106.71821544863283!3d10.834320699999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175292d15df80a1%3A0x8bedb8f3773122f!2sCocoon!5e0!3m2!1svi!2s!4v1735812242394!5m2!1svi!2s"
+                    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <div class="p-5">
+                <h5>WEBSITE THUỘC QUYỀN CTY CỔ PHẦN Y&B</h5>
+                <p>GCNĐKKD: 0315803699 | SỞ KẾ HOẠCH VÀ ĐẦU TƯ TP. HỒ CHÍ MINH CẤP LẦN ĐẦU NGÀY 22/07/2019
+                    14D1, KHU PHỐ 1A, ĐƯỜNG QUỐC LỘ 1A, PHƯỜNG TÂN THỚI HIỆP, QUẬN 12, TP. HỒ CHÍ MINH, VIỆT NAM
+                    ĐIỆN THOẠI: 19009300 – EMAIL: WE@COCOONVIETNAM.COM</p>
+                <h5 class="mt-5">SẢN XUẤT VÀ CHỊU TRÁCH NHIỆM VỀ HÀNG HOÁ CÔNG TY TNHH NATURE STORY</h5>
+                <p>GCNĐKKD: 1101983767 / SỞ KẾ HOẠCH VÀ ĐẦU TƯ TỈNH LONG AN CẤP LẦN ĐẦU NGÀY: 15/04/2021
+                    LÔ LF24A-LF25 ĐƯỜNG SỐ 2, KHU CÔNG NGHIỆP XUYÊN Á, XÃ MỸ HẠNH BẮC, HUYỆN ĐỨC HÒA, TỈNH LONG AN, VIỆT
+                    NAM
+                    ĐIỆN THOẠI: 19009300 – EMAIL: WE@COCOONVIETNAM.COM</p>
+                <img class="mt-2" src="https://cocoonvietnam.com/_nuxt/img/ministry-of-industry-n-trade.199a108.png"
+                    width="20%" alt="">
+                <p style="margin-top: 20px; color:rgb(170, 166, 166);"> © 2024 Cocoon Vietnam. All rights reserved. </p>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
