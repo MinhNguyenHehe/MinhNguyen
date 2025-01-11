@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sản Phẩm</title>
+    <!--bootstrap CDN-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <!--icon bootstrap-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!--font awesome icon-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <!--Google font--> <!--Lấy font online-->
+    <link href="https://fonts.googleapis.com/css2?family=Sedgwick+Ave&display=swap" rel="stylesheet">
+    <!--hiệu ứng xuất hiện-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <style>
+        @font-face {
+            font-family: BarlowCondensed-Light;
+            src: url(./font/BarlowCondensed-Light.ttf);
+        }
+        /* button trở về đầu trang */
+        .button {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgb(84, 55, 35);
+            border: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0px 0px 0px 4px rgba(180, 160, 255, 0.253);
+            cursor: pointer;
+            transition-duration: 0.3s;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .svgIcon {
+            width: 12px;
+            transition-duration: 0.3s;
+        }
+
+        .svgIcon path {
+            fill: white;
+        }
+
+        .button:hover {
+            width: 140px;
+            border-radius: 50px;
+            transition-duration: 0.3s;
+            background-color:  rgb(45, 72, 45);
+            align-items: center;
+        }
+
+        .button:hover .svgIcon {
+            /* width: 20px; */
+            transition-duration: 0.3s;
+            transform: translateY(-200%);
+        }
+
+        .button::before {
+            position: absolute;
+            bottom: -20px;
+            content: "Back to Top";
+            color: white;
+            /* transition-duration: .3s; */
+            font-size: 0px;
+        }
+
+        .button:hover::before {
+            font-size: 13px;
+            opacity: 1;
+            bottom: unset;
+            /* transform: translateY(-30px); */
+            transition-duration: 0.3s;
+        }
+
+        /* thanh thông báo */
+        .thongbao {
+            margin-bottom: 0px;
+            text-align: center;
+            background-color: rgb(35, 33, 30);
+            padding: 10px;
+            color: white;
+            font-size: 14px;
+        }
+
+        /* navbar */
+        .navbar {
+            background-color: rgb(250, 245, 237);
+        }
+
+        /* SP_titile */
+        .SP_title {
+            text-align: center;
+            font-size: 70px;
+            font-weight: 500;
+            font-family: BarlowCondensed-Light;
+            padding: 10px;
+        }
+
+        /*làm thêm, nâng cao (rê chuột vào ảnh sẽ hiện ra chỗ order)*/
+        .menuitem {
+            position: relative;
+            overflow: hidden;
+            /* Đảm bảo phần detail không tràn ra ngoài */
+        }
+
+        .menuitem .detail {
+            position: absolute;
+            top: 0px;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: 0.5s all;
+            /* visibility: hidden;(xài cũng đc nhưng ko có hiệu ứng) */
+        }
+
+        /*khi rê chuột lên menuitem thì detail làm việc...*/
+        .menuitem:hover .detail {
+            /* visibility: visible; */
+            opacity: 1;
+            background-color: rgb(250, 245, 237);
+        }
+
+        /* SP */
+        .a1 {
+            padding-bottom: 15px;
+        }
+
+        /* button SP */
+        #v-pills-tab .nav-link {
+            font-family: BarlowCondensed-Light;
+            font-size: 20px;
+            font-weight: 500;
+            color: black;
+        }
+
+        /* Chỉ định style cho nút active trong #v-pills-tab */
+        #v-pills-tab .nav-link.active {
+            background-color: rgb(84, 55, 35);
+            /* Màu nền khi active */
+            color: #fff;
+            /* Màu chữ khi active */
+            border-color: rgb(84, 55, 35);
+            /* Đảm bảo viền cùng màu */
+        }
+
+        /* Style khi nút active và hover */
+        #v-pills-tab .nav-link:hover {
+            transform: translateX(15px);
+        }
+
+        /* thông tin sp */
+        .card {
+            --font-color: rgb(84, 55, 35);
+            --font-color-sub: rgb(84, 55, 35);
+            --bg-color: transparent;
+            --main-color: rgb(84, 55, 35);
+            --main-focus: rgb(84, 55, 35);
+            width: 230px;
+            height: 300px;
+            background: var(--bg-color);
+            border: 2px solid var(--main-color);
+            box-shadow: 4px 4px var(--main-color);
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            padding: 20px;
+            gap: 10px;
+            font-family: BarlowCondensed-Light;
+        }
+
+        .card:last-child {
+            justify-content: flex-end;
+        }
+
+        .card-title {
+            font-size: 30px;
+            font-weight: 600;
+            text-align: center;
+            color: var(--font-color);
+        }
+
+        .card-subtitle {
+            font-size: 20px;
+            font-weight: 500;
+            color: var(--font-color-sub);
+        }
+
+        .card-divider {
+            width: 100%;
+            border: 1px solid var(--main-color);
+            border-radius: 50px;
+        }
+
+        .card-footer {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-price {
+            font-size: 20px;
+            font-weight: 500;
+            color: var(--font-color);
+        }
+
+        .card-price span {
+            font-size: 20px;
+            font-weight: 500;
+            color: var(--font-color-sub);
+        }
+
+        .card-btn {
+            height: 35px;
+            background: var(--bg-color);
+            border: 2px solid var(--main-color);
+            border-radius: 5px;
+            padding: 0 15px;
+            transition: all 0.3s;
+        }
+
+        .card-btn svg {
+            width: 100%;
+            height: 100%;
+            fill: var(--main-color);
+            transition: all 0.3s;
+        }
+
+        .card-img:hover {
+            transform: translateY(-3px);
+        }
+
+        .card-btn:hover {
+            border: 2px solid var(--main-focus);
+        }
+
+        .card-btn:hover svg {
+            fill: var(--main-focus);
+        }
+
+        .card-btn:active {
+            transform: translateY(3px);
+        }
+
+        /* 100% thuần chay */
+        .marquee {
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+            background-color: rgb(250, 245, 237);
+        }
+
+        .marquee__children {
+            display: flex;
+            animation: marquee-animation 10s linear infinite;
+        }
+
+        @keyframes marquee-animation {
+            from {
+                transform: translateX(0%);
+            }
+
+            to {
+                transform: translateX(-100%);
+            }
+        }
+
+
+        /* footer */
+        footer {
+            background-color: rgb(35, 33, 30);
+            color: rgb(220, 198, 128);
+            padding: 35px;
+            font-size: 15px;
+        }
+
+        footer .d-flex {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        footer iframe {
+            width: 105%;
+            height: 400px;
+            border: 0;
+        }
+
+        footer .p-5 {
+            flex: 1;
+            padding-left: 20px;
+        }
+
+        footer img {
+            width: 100%;
+            max-width: 150px;
+            height: auto;
+        }
+
+        @media (max-width: 768px) {
+            footer {
+                padding: 20px;
+                font-size: 14px;
+            }
+
+            footer .d-flex {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            footer .p-5 {
+                padding-left: 0;
+                text-align: center;
+            }
+
+            footer iframe {
+                height: 250px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            footer {
+                padding: 15px;
+                font-size: 12px;
+            }
+
+            footer iframe {
+                height: 200px;
+            }
+
+            footer img {
+                max-width: 120px;
+            }
+        }
+
+        /* Thêm lớp mới cho phần ảnh */
+        .responsive-images {
+            display: flex;
+            flex-wrap: wrap;
+            /* Cho phép ảnh xuống dòng khi không đủ không gian */
+            justify-content: space-between;
+            gap: 10px;
+            /* Khoảng cách giữa các ảnh */
+        }
+
+        .responsive-images img {
+            flex: 1 1 calc(33.33% - 10px);
+            /* Chia đều ảnh thành 3 cột với khoảng cách trừ đi gap */
+            max-width: 100%;
+            height: auto;
+            /* Đảm bảo ảnh co dãn tỉ lệ theo kích thước gốc */
+            object-fit: cover;
+            /* Ảnh luôn đầy khung */
+            border-radius: 8px;
+            /* Tùy chọn, làm bo góc ảnh */
+        }
+
+        /* Responsive cho màn hình nhỏ hơn */
+        @media (max-width: 768px) {
+            .responsive-images img {
+                flex: 1 1 calc(50% - 10px);
+                /* Chia 2 cột trên màn hình trung bình */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .responsive-images img {
+                flex: 1 1 100%;
+                /* Một ảnh mỗi dòng trên màn hình nhỏ */
+            }
+        }
+    </style>
+</head>
+<a name="MinhNguyen"></a> <!--tạo 1 liên kết rỗng, tạo tên, để bấm vào máy bay trang cuộn lên đây-->
+<!--Thanh Thông Báo-->
+<p class="thongbao">Tận hưởng giao hàng miễn phí toàn quốc với hóa đơn từ 99.000đ <i
+        class="fa-solid fa-truck-fast ms-2"></i> </p>
+<!--Navbar-->
+<nav class="navbar navbar-expand-lg p-3">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="GiuaKy.html"><img
+                src="https://apea.asia/wp-content/uploads/2021/11/cocoon-logo-ib2.png" width="130px" alt=""></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="Index.html">Trang Chủ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Sản Phẩm</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="ThuongHieu.html">Cam Kết</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="KhuyenMai.html">Khuyến Mãi</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="DangNhap.html"><i class="fa-solid fa-user"></i></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<hr>
+
+<body style="background-color: rgb(250, 245, 237);">
+    
+    <!-- chữ SP -->
+    <div class="SP_title animate__animated animate__bounceInDown">
+        <p>SẢN PHẨM</p>
+    </div>
+    <!-- SP -->
+    <div class="container-fluid a1">
+        <!--nav tab trong bootstrap-->
+        <div class="d-flex align-items-start">
+            <div class="nav flex-column nav-pills me-3 w-25" id="v-pills-tab" role="tablist"
+                aria-orientation="vertical">
+                <button class="nav-link active text-start" id="v-pills-home-tab" data-bs-toggle="pill"
+                    data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home"
+                    aria-selected="true">SỮA RỬA MẶT</button>
+                <button class="nav-link text-start" id="v-pills-profile-tab" data-bs-toggle="pill"
+                    data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile"
+                    aria-selected="false">TONER & SERUM</button>
+                <button class="nav-link text-start" id="v-pills-settings-tab" data-bs-toggle="pill"
+                    data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings"
+                    aria-selected="false">CHỐNG NẮNG & XỊT KHOÁNG</button>
+                <button class="nav-link text-start" id="v-pills-moi-tab" data-bs-toggle="pill"
+                    data-bs-target="#v-pills-moi" type="button" role="tab" aria-controls="v-pills-moi"
+                    aria-selected="false">DƯỠNG MÔI</button>
+                <button class="nav-link text-start" id="v-pills-gift-tab" data-bs-toggle="pill"
+                    data-bs-target="#v-pills-gift" type="button" role="tab" aria-controls="v-pills-gift"
+                    aria-selected="false">GIFT BOX</button>
+            </div>
+            <div class="tab-content w-75" id="v-pills-tabContent">
+                <!-- srm -->
+                <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
+                    aria-labelledby="v-pills-home-tab" tabindex="0">
+                    <div class="row row-cols-2 row-cols-lg-4 g-3">
+                        <!--1-->
+                        <div class="col">
+                            <div class="menuitem">
+                                <img src="https://image.cocoonvietnam.com/uploads/z3491780061958_c2ef1011760c3ee0725a1bd163d7f79b_3198e90279.jpg"
+                                    width="100%" alt="">
+                                <!--  -->
+                                <div class="detail">
+                                    <div class="div">
+                                        <div class="card">
+                                            <div class="card-title">Sữa Rửa Mặt Nghệ Hưng Yên</div>
+                                            <div class="card-subtitle ">Dịu nhẹ, da sạch mịn, trắng sáng và rạng rỡ
+                                            </div>
+                                            <hr class="card-divider">
+                                            <div class="card-footer">
+                                                <div class="card-price">295.000đ</div>
+                                                <button class="card-btn">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                        <path
+                                                            d="m397.78 316h-205.13a15 15 0 0 1 -14.65-11.67l-34.54-150.48a15 15 0 0 1 14.62-18.36h274.27a15 15 0 0 1 14.65 18.36l-34.6 150.48a15 15 0 0 1 -14.62 11.67zm-193.19-30h181.25l27.67-120.48h-236.6z">
+                                                        </path>
+                                                        <path
+                                                            d="m222 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z">
+                                                        </path>
+                                                        <path
+                                                            d="m368.42 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z">
+                                                        </path>
+                                                        <path
+                                                            d="m158.08 165.49a15 15 0 0 1 -14.23-10.26l-25.71-77.23h-47.44a15 15 0 1 1 0-30h58.3a15 15 0 0 1 14.23 10.26l29.13 87.49a15 15 0 0 1 -14.23 19.74z">
+                                                        </path>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--2-->
+                        <div class="col">
+                            <div class="menuitem">
+                                <img src="https://image.cocoonvietnam.com/uploads/z3526520930085_8478409d6ac4058a7b77514ce71bdada_d14a16f231.jpg"
+                                    width="100%" alt="">
+                                <!--  -->
+                                <div class="detail">
+                                    <div class="div">
+                                        <div class="card">
+                                            <div class="card-title">Gel Rửa Mặt Bí Đao</div>
+                                            <div class="card-subtitle ">Dịu nhẹ, da sạch mịn, Giảm dầu và mụn</div>
+                                            <hr class="card-divider">
+                                            <div class="card-footer">
+                                                <div class="card-price">295.000đ</div>
+                                                <button class="card-btn">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                        <path
+                                                            d="m397.78 316h-205.13a15 15 0 0 1 -14.65-11.67l-34.54-150.48a15 15 0 0 1 14.62-18.36h274.27a15 15 0 0 1 14.65 18.36l-34.6 150.48a15 15 0 0 1 -14.62 11.67zm-193.19-30h181.25l27.67-120.48h-236.6z">
+                                                        </path>
+                                                        <path
+                                                            d="m222 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z">
+                                                        </path>
+                                                        <path
+                                                            d="m368.42 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z">
+                                                        </path>
+                                                        <path
+                                                            d="m158.08 165.49a15 15 0 0 1 -14.23-10.26l-25.71-77.23h-47.44a15 15 0 1 1 0-30h58.3a15 15 0 0 1 14.23 10.26l29.13 87.49a15 15 0 0 1 -14.23 19.74z">
+                                                        </path>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--3-->
+                        <div class="col">
+                            <div class="menuitem">
+                                <img src="https://image.cocoonvietnam.com/uploads/z4144217404386_2fad2f6b8b47c1047f6e4e0728a96b04_af02e68c7c.jpg"
+                                    width="100%" alt="">
+                                <!--  -->
+                                <div class="detail">
+                                    <div class="div">
+                                        <div class="card">
+                                            <div class="card-title">Gel Rửa Mặt Cafe Đắk Lắk</div>
+                                            <div class="card-subtitle ">Dịu nhẹ, da sạch mịn, Cho làn da mềm mại và rạng
+                                                rỡ</div>
+                                            <hr class="card-divider">
+                                            <div class="card-footer">
+                                                <div class="card-price">295.000đ</div>
+                                                <button class="card-btn">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                        <path
+                                                            d="m397.78 316h-205.13a15 15 0 0 1 -14.65-11.67l-34.54-150.48a15 15 0 0 1 14.62-18.36h274.27a15 15 0 0 1 14.65 18.36l-34.6 150.48a15 15 0 0 1 -14.62 11.67zm-193.19-30h181.25l27.67-120.48h-236.6z">
+                                                        </path>
+                                                        <path
+                                                            d="m222 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z">
+                                                        </path>
+                                                        <path
+                                                            d="m368.42 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z">
+                                                        </path>
+                                                        <path
+                                                            d="m158.08 165.49a15 15 0 0 1 -14.23-10.26l-25.71-77.23h-47.44a15 15 0 1 1 0-30h58.3a15 15 0 0 1 14.23 10.26l29.13 87.49a15 15 0 0 1 -14.23 19.74z">
+                                                        </path>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--4-->
+                        <div class="col">
+                            <div class="menuitem">
+                                <img src="https://image.cocoonvietnam.com/uploads/z4064745554320_948e1adc6b3d34513f0e362e5de1d696_0626ba1caf.jpg"
+                                    width="100%" alt="">
+                                <!--  -->
+                                <div class="detail">
+                                    <div class="div">
+                                        <div class="card">
+                                            <div class="card-title">Gel Rửa Mặt Cafe Đắk Lắk</div>
+                                            <div class="card-subtitle ">Dịu nhẹ, da sạch mịn, Cho làn da mềm mại và rạng
+                                                rỡ</div>
+                                            <hr class="card-divider">
+                                            <div class="card-footer">
+                                                <div class="card-price">195.000đ</div>
+                                                <button class="card-btn">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                        <path
+                                                            d="m397.78 316h-205.13a15 15 0 0 1 -14.65-11.67l-34.54-150.48a15 15 0 0 1 14.62-18.36h274.27a15 15 0 0 1 14.65 18.36l-34.6 150.48a15 15 0 0 1 -14.62 11.67zm-193.19-30h181.25l27.67-120.48h-236.6z">
+                                                        </path>
+                                                        <path
+                                                            d="m222 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z">
+                                                        </path>
+                                                        <path
+                                                            d="m368.42 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z">
+                                                        </path>
+                                                        <path
+                                                            d="m158.08 165.49a15 15 0 0 1 -14.23-10.26l-25.71-77.23h-47.44a15 15 0 1 1 0-30h58.3a15 15 0 0 1 14.23 10.26l29.13 87.49a15 15 0 0 1 -14.23 19.74z">
+                                                        </path>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--5-->
+                        <div class="col">
+                            <div class="menuitem">
+                                <img src="https://image.cocoonvietnam.com/uploads/z3526709694076_945daa53da7e8d0d674d19b2d92dd792_e41da5dad9.jpg"
+                                    width="100%" alt="">
+                                <!--  -->
+                                <div class="detail">
+                                    <div class="div">
+                                        <div class="card">
+                                            <div class="card-title">Sữa Rửa Mặt Nghệ Hưng Yên</div>
+                                            <div class="card-subtitle ">Dịu nhẹ, da sạch mịn, trắng sáng và rạng rỡ
+                                            </div>
+                                            <hr class="card-divider">
+                                            <div class="card-footer">
+                                                <div class="card-price">195.000đ</div>
+                                                <button class="card-btn">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                        <path
+                                                            d="m397.78 316h-205.13a15 15 0 0 1 -14.65-11.67l-34.54-150.48a15 15 0 0 1 14.62-18.36h274.27a15 15 0 0 1 14.65 18.36l-34.6 150.48a15 15 0 0 1 -14.62 11.67zm-193.19-30h181.25l27.67-120.48h-236.6z">
+                                                        </path>
+                                                        <path
+                                                            d="m222 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z">
+                                                        </path>
+                                                        <path
+                                                            d="m368.42 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z">
+                                                        </path>
+                                                        <path
+                                                            d="m158.08 165.49a15 15 0 0 1 -14.23-10.26l-25.71-77.23h-47.44a15 15 0 1 1 0-30h58.3a15 15 0 0 1 14.23 10.26l29.13 87.49a15 15 0 0 1 -14.23 19.74z">
+                                                        </path>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--6-->
+                        <div class="col">
+                            <div class="menuitem">
+                                <img src="https://image.cocoonvietnam.com/uploads/z4394607669965_ca1ceaa3a09cb9e3f966f4ac4256dd9a_1_f787014de5.jpg"
+                                    width="100%" alt="">
+                                <!--  -->
+                                <div class="detail">
+                                    <div class="div">
+                                        <div class="card">
+                                            <div class="card-title">Gel Rửa Mặt Bí Đao</div>
+                                            <div class="card-subtitle ">Dịu nhẹ, da sạch mịn, Giảm dầu và mụn</div>
+                                            <hr class="card-divider">
+                                            <div class="card-footer">
+                                                <div class="card-price">195.000đ</div>
+                                                <button class="card-btn">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                        <path
+                                                            d="m397.78 316h-205.13a15 15 0 0 1 -14.65-11.67l-34.54-150.48a15 15 0 0 1 14.62-18.36h274.27a15 15 0 0 1 14.65 18.36l-34.6 150.48a15 15 0 0 1 -14.62 11.67zm-193.19-30h181.25l27.67-120.48h-236.6z">
+                                                        </path>
+                                                        <path
+                                                            d="m222 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z">
+                                                        </path>
+                                                        <path
+                                                            d="m368.42 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z">
+                                                        </path>
+                                                        <path
+                                                            d="m158.08 165.49a15 15 0 0 1 -14.23-10.26l-25.71-77.23h-47.44a15 15 0 1 1 0-30h58.3a15 15 0 0 1 14.23 10.26l29.13 87.49a15 15 0 0 1 -14.23 19.74z">
+                                                        </path>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--7-->
+                        <div class="col">
+                            <div class="menuitem">
+                                <img src="https://image.cocoonvietnam.com/uploads/Website_Avatar_Sua_rua_mat_Sen_Hau_Giang_140ml_573f5b39f6.jpg"
+                                    width="100%" alt="">
+                                <!--  -->
+                                <div class="detail">
+                                    <div class="div">
+                                        <div class="card">
+                                            <div class="card-title">Sữa Rửa Mặt Sen Hậu Giang</div>
+                                            <div class="card-subtitle ">Dịu nhẹ, làm sạch, làm dịu da và dưỡng ẩm</div>
+                                            <hr class="card-divider">
+                                            <div class="card-footer">
+                                                <div class="card-price">295.000đ</div>
+                                                <button class="card-btn">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                        <path
+                                                            d="m397.78 316h-205.13a15 15 0 0 1 -14.65-11.67l-34.54-150.48a15 15 0 0 1 14.62-18.36h274.27a15 15 0 0 1 14.65 18.36l-34.6 150.48a15 15 0 0 1 -14.62 11.67zm-193.19-30h181.25l27.67-120.48h-236.6z">
+                                                        </path>
+                                                        <path
+                                                            d="m222 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z">
+                                                        </path>
+                                                        <path
+                                                            d="m368.42 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z">
+                                                        </path>
+                                                        <path
+                                                            d="m158.08 165.49a15 15 0 0 1 -14.23-10.26l-25.71-77.23h-47.44a15 15 0 1 1 0-30h58.3a15 15 0 0 1 14.23 10.26l29.13 87.49a15 15 0 0 1 -14.23 19.74z">
+                                                        </path>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--8-->
+                        <div class="col">
+                            <div class="menuitem">
+                                <img src="https://image.cocoonvietnam.com/uploads/z3526709681164_fea7a1510c21c6b18f292e02abb7f1ab_0a71044ada.jpg"
+                                    width="100%" alt="">
+                                <!--  -->
+                                <div class="detail">
+                                    <div class="div">
+                                        <div class="card">
+                                            <div class="card-title">Gel Rửa Mặt Hoa Hồng</div>
+                                            <div class="card-subtitle ">Dịu nhẹ, da sạch mịn, trắng sáng và rạng rỡ
+                                            </div>
+                                            <hr class="card-divider">
+                                            <div class="card-footer">
+                                                <div class="card-price">195.000đ</div>
+                                                <button class="card-btn">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                        <path
+                                                            d="m397.78 316h-205.13a15 15 0 0 1 -14.65-11.67l-34.54-150.48a15 15 0 0 1 14.62-18.36h274.27a15 15 0 0 1 14.65 18.36l-34.6 150.48a15 15 0 0 1 -14.62 11.67zm-193.19-30h181.25l27.67-120.48h-236.6z">
+                                                        </path>
+                                                        <path
+                                                            d="m222 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z">
+                                                        </path>
+                                                        <path
+                                                            d="m368.42 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z">
+                                                        </path>
+                                                        <path
+                                                            d="m158.08 165.49a15 15 0 0 1 -14.23-10.26l-25.71-77.23h-47.44a15 15 0 1 1 0-30h58.3a15 15 0 0 1 14.23 10.26l29.13 87.49a15 15 0 0 1 -14.23 19.74z">
+                                                        </path>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- toner, serum -->
+                <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab"
+                    tabindex="0">
+                    <div class="row row-cols-2 row-cols-lg-3 g-3">
+                        <!--1-->
+                        <div class="col">
+                            <div class="menuitem">
+                                <img src="https://image.cocoonvietnam.com/uploads/Web_Avatar_Nuoc_Sen_310ml_copy_100_996dc09029.jpg"
+                                    width="95%" alt="">
+                                <!--  -->
+                                <div class="detail">
+                                    <div class="div">
+                                        <div class="card">
+                                            <div class="card-title">Nước Sen Hậu Giang</div>
+                                            <div class="card-subtitle ">Dịu nhẹ, phục hồi đa nhiệm
+                                            </div>
+                                            <hr class="card-divider">
+                                            <div class="card-footer">
+                                                <div class="card-price">295.000đ</div>
+                                                <button class="card-btn">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                        <path
+                                                            d="m397.78 316h-205.13a15 15 0 0 1 -14.65-11.67l-34.54-150.48a15 15 0 0 1 14.62-18.36h274.27a15 15 0 0 1 14.65 18.36l-34.6 150.48a15 15 0 0 1 -14.62 11.67zm-193.19-30h181.25l27.67-120.48h-236.6z">
+                                                        </path>
+                                                        <path
+                                                            d="m222 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z">
+                                                        </path>
+                                                        <path
+                                                            d="m368.42 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z">
+                                                        </path>
+                                                        <path
+                                                            d="m158.08 165.49a15 15 0 0 1 -14.23-10.26l-25.71-77.23h-47.44a15 15 0 1 1 0-30h58.3a15 15 0 0 1 14.23 10.26l29.13 87.49a15 15 0 0 1 -14.23 19.74z">
+                                                        </path>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--2-->
+                        <div class="col">
+                            <div class="menuitem">
+                                <img src="https://image.cocoonvietnam.com/uploads/z3526520919826_f50cccbc71a7fb1b8ea680592d8528d4_e15f2eeefc.jpg"
+                                    width="95%" alt="">
+                                <!--  -->
+                                <div class="detail">
+                                    <div class="div">
+                                        <div class="card">
+                                            <div class="card-title">Nước Bí Đao Cân Bằng Da</div>
+                                            <div class="card-subtitle ">Dịu nhẹ, giảm dầu và mụn</div>
+                                            <hr class="card-divider">
+                                            <div class="card-footer">
+                                                <div class="card-price">395.000đ</div>
+                                                <button class="card-btn">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                        <path
+                                                            d="m397.78 316h-205.13a15 15 0 0 1 -14.65-11.67l-34.54-150.48a15 15 0 0 1 14.62-18.36h274.27a15 15 0 0 1 14.65 18.36l-34.6 150.48a15 15 0 0 1 -14.62 11.67zm-193.19-30h181.25l27.67-120.48h-236.6z">
+                                                        </path>
+                                                        <path
+                                                            d="m222 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z">
+                                                        </path>
+                                                        <path
+                                                            d="m368.42 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z">
+                                                        </path>
+                                                        <path
+                                                            d="m158.08 165.49a15 15 0 0 1 -14.23-10.26l-25.71-77.23h-47.44a15 15 0 1 1 0-30h58.3a15 15 0 0 1 14.23 10.26l29.13 87.49a15 15 0 0 1 -14.23 19.74z">
+                                                        </path>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--3-->
+                        <div class="col">
+                            <div class="menuitem">
+                                <img src="https://image.cocoonvietnam.com/uploads/z4121418281884_8317874b9540c0f394d4450ee941e18c_1ecd94cf9e.jpg"
+                                    width="95%" alt="">
+                                <!--  -->
+                                <div class="detail">
+                                    <div class="div">
+                                        <div class="card">
+                                            <div class="card-title">Serum Bí Đao N15</div>
+                                            <div class="card-subtitle ">Giảm bóng nhờn và giảm mụn</div>
+                                            <hr class="card-divider">
+                                            <div class="card-footer">
+                                                <div class="card-price">495.000đ</div>
+                                                <button class="card-btn">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                        <path
+                                                            d="m397.78 316h-205.13a15 15 0 0 1 -14.65-11.67l-34.54-150.48a15 15 0 0 1 14.62-18.36h274.27a15 15 0 0 1 14.65 18.36l-34.6 150.48a15 15 0 0 1 -14.62 11.67zm-193.19-30h181.25l27.67-120.48h-236.6z">
+                                                        </path>
+                                                        <path
+                                                            d="m222 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z">
+                                                        </path>
+                                                        <path
+                                                            d="m368.42 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z">
+                                                        </path>
+                                                        <path
+                                                            d="m158.08 165.49a15 15 0 0 1 -14.23-10.26l-25.71-77.23h-47.44a15 15 0 1 1 0-30h58.3a15 15 0 0 1 14.23 10.26l29.13 87.49a15 15 0 0 1 -14.23 19.74z">
+                                                        </path>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--4-->
+                        <div class="col">
+                            <div class="menuitem">
+                                <img src="https://image.cocoonvietnam.com/uploads/z4389425025003_c3b68e5737569f01eb630fb0c010951c_47aa72d54d.jpg"
+                                    width="95%" alt="">
+                                <!--  -->
+                                <div class="detail">
+                                    <div class="div">
+                                        <div class="card">
+                                            <div class="card-title">Serum Nghệ Hưng Yên C22</div>
+                                            <div class="card-subtitle ">Sáng da, mờ vết thâm mụn</div>
+                                            <hr class="card-divider">
+                                            <div class="card-footer">
+                                                <div class="card-price">495.000đ</div>
+                                                <button class="card-btn">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                        <path
+                                                            d="m397.78 316h-205.13a15 15 0 0 1 -14.65-11.67l-34.54-150.48a15 15 0 0 1 14.62-18.36h274.27a15 15 0 0 1 14.65 18.36l-34.6 150.48a15 15 0 0 1 -14.62 11.67zm-193.19-30h181.25l27.67-120.48h-236.6z">
+                                                        </path>
+                                                        <path
+                                                            d="m222 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z">
+                                                        </path>
+                                                        <path
+                                                            d="m368.42 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z">
+                                                        </path>
+                                                        <path
+                                                            d="m158.08 165.49a15 15 0 0 1 -14.23-10.26l-25.71-77.23h-47.44a15 15 0 1 1 0-30h58.3a15 15 0 0 1 14.23 10.26l29.13 87.49a15 15 0 0 1 -14.23 19.74z">
+                                                        </path>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--5-->
+                        <div class="col">
+                            <div class="menuitem">
+                                <img src="https://image.cocoonvietnam.com/uploads/Skin_N_Tinh_chat_nghe_C10_a7b2be4596.png"
+                                    width="95%" alt="">
+                                <!--  -->
+                                <div class="detail">
+                                    <div class="div">
+                                        <div class="card">
+                                            <div class="card-title">Serum Nghệ Hưng Yên C10</div>
+                                            <div class="card-subtitle ">Dịu nhẹ, sáng da, mờ vết thâm mụn
+                                            </div>
+                                            <hr class="card-divider">
+                                            <div class="card-footer">
+                                                <div class="card-price">295.000đ</div>
+                                                <button class="card-btn">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                        <path
+                                                            d="m397.78 316h-205.13a15 15 0 0 1 -14.65-11.67l-34.54-150.48a15 15 0 0 1 14.62-18.36h274.27a15 15 0 0 1 14.65 18.36l-34.6 150.48a15 15 0 0 1 -14.62 11.67zm-193.19-30h181.25l27.67-120.48h-236.6z">
+                                                        </path>
+                                                        <path
+                                                            d="m222 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z">
+                                                        </path>
+                                                        <path
+                                                            d="m368.42 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z">
+                                                        </path>
+                                                        <path
+                                                            d="m158.08 165.49a15 15 0 0 1 -14.23-10.26l-25.71-77.23h-47.44a15 15 0 1 1 0-30h58.3a15 15 0 0 1 14.23 10.26l29.13 87.49a15 15 0 0 1 -14.23 19.74z">
+                                                        </path>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--6-->
+                        <div class="col">
+                            <div class="menuitem">
+                                <img src="https://image.cocoonvietnam.com/uploads/Artboard_18_e4234e2f81.jpg"
+                                    width="95%" alt="">
+                                <!--  -->
+                                <div class="detail">
+                                    <div class="div">
+                                        <div class="card">
+                                            <div class="card-title">Serum Hoa Hồng</div>
+                                            <div class="card-subtitle ">Dịu nhẹ, cấp ẩm, phục hồi</div>
+                                            <hr class="card-divider">
+                                            <div class="card-footer">
+                                                <div class="card-price">295.000đ</div>
+                                                <button class="card-btn">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                        <path
+                                                            d="m397.78 316h-205.13a15 15 0 0 1 -14.65-11.67l-34.54-150.48a15 15 0 0 1 14.62-18.36h274.27a15 15 0 0 1 14.65 18.36l-34.6 150.48a15 15 0 0 1 -14.62 11.67zm-193.19-30h181.25l27.67-120.48h-236.6z">
+                                                        </path>
+                                                        <path
+                                                            d="m222 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z">
+                                                        </path>
+                                                        <path
+                                                            d="m368.42 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z">
+                                                        </path>
+                                                        <path
+                                                            d="m158.08 165.49a15 15 0 0 1 -14.23-10.26l-25.71-77.23h-47.44a15 15 0 1 1 0-30h58.3a15 15 0 0 1 14.23 10.26l29.13 87.49a15 15 0 0 1 -14.23 19.74z">
+                                                        </path>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- CN, XK -->
+                <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab"
+                    tabindex="0">
+                    <div class="row row-cols-2 row-cols-lg-4 g-3">
+                        <!--1-->
+                        <div class="col">
+                            <div class="menuitem">
+                                <img src="https://image.cocoonvietnam.com/uploads/Ecom_Skin_BD_Sua_chong_nang_bi_dao_50ml_01_01_9df155e3a1.png"
+                                    width="100%" alt="">
+                                <!--  -->
+                                <div class="detail">
+                                    <div class="div">
+                                        <div class="card">
+                                            <div class="card-title">Sữa Chống Nắng Bí Đao</div>
+                                            <div class="card-subtitle ">Chống nắng, bảo vệ da trước tia UV
+                                            </div>
+                                            <hr class="card-divider">
+                                            <div class="card-footer">
+                                                <div class="card-price">439.000đ</div>
+                                                <button class="card-btn">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                        <path
+                                                            d="m397.78 316h-205.13a15 15 0 0 1 -14.65-11.67l-34.54-150.48a15 15 0 0 1 14.62-18.36h274.27a15 15 0 0 1 14.65 18.36l-34.6 150.48a15 15 0 0 1 -14.62 11.67zm-193.19-30h181.25l27.67-120.48h-236.6z">
+                                                        </path>
+                                                        <path
+                                                            d="m222 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z">
+                                                        </path>
+                                                        <path
+                                                            d="m368.42 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z">
+                                                        </path>
+                                                        <path
+                                                            d="m158.08 165.49a15 15 0 0 1 -14.23-10.26l-25.71-77.23h-47.44a15 15 0 1 1 0-30h58.3a15 15 0 0 1 14.23 10.26l29.13 87.49a15 15 0 0 1 -14.23 19.74z">
+                                                        </path>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--2-->
+                        <div class="col">
+                            <div class="menuitem">
+                                <img src="https://image.cocoonvietnam.com/uploads/z4389424986730_1e574bdd58278206885aaafd9cf54665_f04a0b7f9b.jpg"
+                                    width="100%" alt="">
+                                <!--  -->
+                                <div class="detail">
+                                    <div class="div">
+                                        <div class="card">
+                                            <div class="card-title">Kem Chống Nắng Bí Đao</div>
+                                            <div class="card-subtitle ">Chống nắng, bảo vệ da trước các tia UV</div>
+                                            <hr class="card-divider">
+                                            <div class="card-footer">
+                                                <div class="card-price">295.000đ</div>
+                                                <button class="card-btn">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                        <path
+                                                            d="m397.78 316h-205.13a15 15 0 0 1 -14.65-11.67l-34.54-150.48a15 15 0 0 1 14.62-18.36h274.27a15 15 0 0 1 14.65 18.36l-34.6 150.48a15 15 0 0 1 -14.62 11.67zm-193.19-30h181.25l27.67-120.48h-236.6z">
+                                                        </path>
+                                                        <path
+                                                            d="m222 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z">
+                                                        </path>
+                                                        <path
+                                                            d="m368.42 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z">
+                                                        </path>
+                                                        <path
+                                                            d="m158.08 165.49a15 15 0 0 1 -14.23-10.26l-25.71-77.23h-47.44a15 15 0 1 1 0-30h58.3a15 15 0 0 1 14.23 10.26l29.13 87.49a15 15 0 0 1 -14.23 19.74z">
+                                                        </path>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--3-->
+                        <div class="col">
+                            <div class="menuitem">
+                                <img src="https://image.cocoonvietnam.com/uploads/Ecom_Skin_BD_Sua_chong_nang_bi_dao_15ml_01_2_777849abe3.png"
+                                    width="100%" alt="">
+                                <!--  -->
+                                <div class="detail">
+                                    <div class="div">
+                                        <div class="card">
+                                            <div class="card-title">Sữa Chống Nắng Bí Đao Mini</div>
+                                            <div class="card-subtitle ">Chống nắng, bảo vệ da trước các tia UV</div>
+                                            <hr class="card-divider">
+                                            <div class="card-footer">
+                                                <div class="card-price">185.000đ</div>
+                                                <button class="card-btn">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                        <path
+                                                            d="m397.78 316h-205.13a15 15 0 0 1 -14.65-11.67l-34.54-150.48a15 15 0 0 1 14.62-18.36h274.27a15 15 0 0 1 14.65 18.36l-34.6 150.48a15 15 0 0 1 -14.62 11.67zm-193.19-30h181.25l27.67-120.48h-236.6z">
+                                                        </path>
+                                                        <path
+                                                            d="m222 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z">
+                                                        </path>
+                                                        <path
+                                                            d="m368.42 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z">
+                                                        </path>
+                                                        <path
+                                                            d="m158.08 165.49a15 15 0 0 1 -14.23-10.26l-25.71-77.23h-47.44a15 15 0 1 1 0-30h58.3a15 15 0 0 1 14.23 10.26l29.13 87.49a15 15 0 0 1 -14.23 19.74z">
+                                                        </path>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--4-->
+                        <div class="col">
+                            <div class="menuitem">
+                                <img src="https://image.cocoonvietnam.com/uploads/Artboard_16_2d4e366728.jpg"
+                                    width="100%" alt="">
+                                <!--  -->
+                                <div class="detail">
+                                    <div class="div">
+                                        <div class="card">
+                                            <div class="card-title">Xịt Khoáng Nghệ Hưng Yên</div>
+                                            <div class="card-subtitle ">Cấp ẩm, chống oxy hóa da</div>
+                                            <hr class="card-divider">
+                                            <div class="card-footer">
+                                                <div class="card-price">215.000đ</div>
+                                                <button class="card-btn">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                        <path
+                                                            d="m397.78 316h-205.13a15 15 0 0 1 -14.65-11.67l-34.54-150.48a15 15 0 0 1 14.62-18.36h274.27a15 15 0 0 1 14.65 18.36l-34.6 150.48a15 15 0 0 1 -14.62 11.67zm-193.19-30h181.25l27.67-120.48h-236.6z">
+                                                        </path>
+                                                        <path
+                                                            d="m222 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z">
+                                                        </path>
+                                                        <path
+                                                            d="m368.42 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z">
+                                                        </path>
+                                                        <path
+                                                            d="m158.08 165.49a15 15 0 0 1 -14.23-10.26l-25.71-77.23h-47.44a15 15 0 1 1 0-30h58.3a15 15 0 0 1 14.23 10.26l29.13 87.49a15 15 0 0 1 -14.23 19.74z">
+                                                        </path>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- môi -->
+                <div class="tab-pane fade" id="v-pills-moi" role="tabpanel" aria-labelledby="v-pills-moi-tab"
+                    tabindex="0">
+                    <div class="row row-cols-2 row-cols-lg-4 g-3">
+                        <!--1-->
+                        <div class="col">
+                            <div class="menuitem">
+                                <img src="https://image.cocoonvietnam.com/uploads/CP_Ca_phe_moi_1a1b8ddbf1.jpg"
+                                    width="100%" alt="">
+                                <!--  -->
+                                <div class="detail">
+                                    <div class="div">
+                                        <div class="card">
+                                            <div class="card-title">Cafe Đắc Lắk Làm Sạch Da Chết Môi </div>
+                                            <div class="card-subtitle ">Làm sạch da chết, làm mềm môi
+                                            </div>
+                                            <hr class="card-divider">
+                                            <div class="card-footer">
+                                                <div class="card-price">75.000đ</div>
+                                                <button class="card-btn">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                        <path
+                                                            d="m397.78 316h-205.13a15 15 0 0 1 -14.65-11.67l-34.54-150.48a15 15 0 0 1 14.62-18.36h274.27a15 15 0 0 1 14.65 18.36l-34.6 150.48a15 15 0 0 1 -14.62 11.67zm-193.19-30h181.25l27.67-120.48h-236.6z">
+                                                        </path>
+                                                        <path
+                                                            d="m222 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z">
+                                                        </path>
+                                                        <path
+                                                            d="m368.42 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z">
+                                                        </path>
+                                                        <path
+                                                            d="m158.08 165.49a15 15 0 0 1 -14.23-10.26l-25.71-77.23h-47.44a15 15 0 1 1 0-30h58.3a15 15 0 0 1 14.23 10.26l29.13 87.49a15 15 0 0 1 -14.23 19.74z">
+                                                        </path>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--2-->
+                        <div class="col">
+                            <div class="menuitem">
+                                <img src="https://image.cocoonvietnam.com/uploads/Son_duong_dau_dua_26498c9936.jpg"
+                                    width="100%" alt="">
+                                <!--  -->
+                                <div class="detail">
+                                    <div class="div">
+                                        <div class="card">
+                                            <div class="card-title">Son Dưỡng Dầu Dừa Bến Tre</div>
+                                            <div class="card-subtitle ">Cấp ẩm, giúp môi mềm mượt</div>
+                                            <hr class="card-divider">
+                                            <div class="card-footer">
+                                                <div class="card-price">32.000đ</div>
+                                                <button class="card-btn">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                        <path
+                                                            d="m397.78 316h-205.13a15 15 0 0 1 -14.65-11.67l-34.54-150.48a15 15 0 0 1 14.62-18.36h274.27a15 15 0 0 1 14.65 18.36l-34.6 150.48a15 15 0 0 1 -14.62 11.67zm-193.19-30h181.25l27.67-120.48h-236.6z">
+                                                        </path>
+                                                        <path
+                                                            d="m222 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z">
+                                                        </path>
+                                                        <path
+                                                            d="m368.42 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z">
+                                                        </path>
+                                                        <path
+                                                            d="m158.08 165.49a15 15 0 0 1 -14.23-10.26l-25.71-77.23h-47.44a15 15 0 1 1 0-30h58.3a15 15 0 0 1 14.23 10.26l29.13 87.49a15 15 0 0 1 -14.23 19.74z">
+                                                        </path>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- gift box -->
+                <div class="tab-pane fade" id="v-pills-gift" role="tabpanel" aria-labelledby="v-pills-gift-tab"
+                    tabindex="0">
+                    <div class="row row-cols-2 row-cols-lg-4 g-3">
+                        <!--1-->
+                        <div class="col">
+                            <div class="menuitem">
+                                <img src="https://image.cocoonvietnam.com/uploads/469093190_596452236075549_4237615980681313501_n_085e36237b.jpg"
+                                    width="150%" alt="">
+                                <!--  -->
+                                <div class="detail">
+                                    <div class="div">
+                                        <div class="card">
+                                            <div class="card-title">BOX ỬNG HỒNG KHÔNG ỬNG ĐỎ</div>
+                                            <div class="card-subtitle ">???????
+                                            </div>
+                                            <hr class="card-divider">
+                                            <div class="card-footer">
+                                                <div class="card-price">395.000đ</div>
+                                                <button class="card-btn">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                        <path
+                                                            d="m397.78 316h-205.13a15 15 0 0 1 -14.65-11.67l-34.54-150.48a15 15 0 0 1 14.62-18.36h274.27a15 15 0 0 1 14.65 18.36l-34.6 150.48a15 15 0 0 1 -14.62 11.67zm-193.19-30h181.25l27.67-120.48h-236.6z">
+                                                        </path>
+                                                        <path
+                                                            d="m222 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z">
+                                                        </path>
+                                                        <path
+                                                            d="m368.42 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z">
+                                                        </path>
+                                                        <path
+                                                            d="m158.08 165.49a15 15 0 0 1 -14.23-10.26l-25.71-77.23h-47.44a15 15 0 1 1 0-30h58.3a15 15 0 0 1 14.23 10.26l29.13 87.49a15 15 0 0 1 -14.23 19.74z">
+                                                        </path>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--2-->
+                        <div class="col">
+                            <div class="menuitem">
+                                <img src="https://image.cocoonvietnam.com/uploads/Website_Thumbnail_Giftbox_Mot_Tinh_yeu_3093261887.jpg"
+                                    width="124%" alt="">
+                                <!--  -->
+                                <div class="detail">
+                                    <div class="div">
+                                        <div class="card">
+                                            <div class="card-title">BOX VALI "MỘT TÌNH YÊU"</div>
+                                            <div class="card-subtitle ">???????</div>
+                                            <hr class="card-divider">
+                                            <div class="card-footer">
+                                                <div class="card-price">320.000đ</div>
+                                                <button class="card-btn">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                        <path
+                                                            d="m397.78 316h-205.13a15 15 0 0 1 -14.65-11.67l-34.54-150.48a15 15 0 0 1 14.62-18.36h274.27a15 15 0 0 1 14.65 18.36l-34.6 150.48a15 15 0 0 1 -14.62 11.67zm-193.19-30h181.25l27.67-120.48h-236.6z">
+                                                        </path>
+                                                        <path
+                                                            d="m222 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z">
+                                                        </path>
+                                                        <path
+                                                            d="m368.42 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z">
+                                                        </path>
+                                                        <path
+                                                            d="m158.08 165.49a15 15 0 0 1 -14.23-10.26l-25.71-77.23h-47.44a15 15 0 1 1 0-30h58.3a15 15 0 0 1 14.23 10.26l29.13 87.49a15 15 0 0 1 -14.23 19.74z">
+                                                        </path>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--100% thuần chay-->
+    <div class="overflow-hidden relative marquee border-b border-secondary-light3 marquee_home p-5">
+        <div class="flex flex-auto marquee__children h-10 2xl:h-16" style="transform: translate(-50%, 0%);">
+            <div class="flex-shrink-0 h-full marquee__child"
+                style="transform: translate(-97.01%, 0%) translate3d(0px, 0px, 0px);"><img
+                    src="https://image.cocoonvietnam.com/uploads/home_marquee_b3a3a85ad5.svg"
+                    class="h-full max-w-none ml-12 lg:ml-20"></div>
+            <div class="flex-shrink-0 h-full marquee__child"
+                style="transform: translate(-97.01%, 0%) translate3d(0px, 0px, 0px);"><img
+                    src="https://image.cocoonvietnam.com/uploads/home_marquee_b3a3a85ad5.svg"
+                    class="h-full max-w-none ml-12 lg:ml-20"></div>
+            <div class="flex-shrink-0 h-full marquee__child"
+                style="transform: translate(-97.01%, 0%) translate3d(0px, 0px, 0px);"><img
+                    src="https://image.cocoonvietnam.com/uploads/home_marquee_b3a3a85ad5.svg"
+                    class="h-full max-w-none ml-12 lg:ml-20"></div>
+            <div class="flex-shrink-0 h-full marquee__child"
+                style="transform: translate(-97.01%, 0%) translate3d(0px, 0px, 0px);"><img
+                    src="https://image.cocoonvietnam.com/uploads/home_marquee_b3a3a85ad5.svg"
+                    class="h-full max-w-none ml-12 lg:ml-20"></div>
+        </div>
+    </div>
+    <!-- ảnh -->
+    <div class="responsive-images">
+        <img src="https://scontent.fsgn2-9.fna.fbcdn.net/v/t1.6435-9/193922157_4008170675945195_7638420986009352668_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=127cfc&_nc_ohc=VZ9JKvPAgTwQ7kNvgG2D3qC&_nc_oc=AdiLcYPOq0b2IAfEb8iI3YmFzK8vYAWGug-ugslZRsJBYLawm3reTUB3GLt_Kr6W8Q6D3ha2Y8cnhdgqkCWK8ANb&_nc_zt=23&_nc_ht=scontent.fsgn2-9.fna&_nc_gid=A1U7kWMULXOstpeX54PKnzy&oh=00_AYAF-kAb8hh8iiMDj0xEr5cH8C7jnpFCMDtxwSMIY_URTQ&oe=679F6BAD"
+            width="33%" height="520px" alt="">
+        <img src="https://scontent.fsgn5-13.fna.fbcdn.net/v/t1.6435-9/102436629_2998355360260070_3180664213173436416_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=127cfc&_nc_ohc=BLA4Wt30zqcQ7kNvgEb4jxe&_nc_zt=23&_nc_ht=scontent.fsgn5-13.fna&_nc_gid=Am5NmfRPUfakZZ2eiujKHBh&oh=00_AYDlNh6uu3WT-hkr3GO2eT6KoC-a6RjaQ0dUUmsrQQl50A&oe=67A00A5B"
+            width="33%" height="520px" alt="">
+        <img src="https://scontent.fsgn2-6.fna.fbcdn.net/v/t1.6435-9/191683450_4008169802611949_8552877133338155381_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=127cfc&_nc_ohc=rGgu27y6eZkQ7kNvgGENDzn&_nc_oc=Adi8yDUXtRzkS2LW0QUMunN5IEPu7huNCPCh1tVujGzItSHu_8z1GQrIeNhkqoG5UOc-jaCOcKcARLG-TPXlj3Ar&_nc_zt=23&_nc_ht=scontent.fsgn2-6.fna&_nc_gid=AgziTwZNf3WX-15w11wrWy1&oh=00_AYCfmm5KWPkJqUSQ-fJv2uYJvs1acOhgcMhybRvEjiQKPQ&oe=679F63CD"
+            width="30%" height="50%" alt="">
+    </div>
+    <!--icon (nút để bấm vào cuộn về đầu trang)-->
+    <a href="#MinhNguyen" style="position: fixed; right: 11px; bottom: 11px;">
+        <button class="button">
+            <svg class="svgIcon" viewBox="0 0 384 512">
+                <path
+                    d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z">
+                </path>
+            </svg>
+        </button>
+
+    </a>
+    <!-- footer -->
+    <footer>
+        <div class="d-flex">
+            <div>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d62699.18617585225!2d106.71821544863283!3d10.834320699999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175292d15df80a1%3A0x8bedb8f3773122f!2sCocoon!5e0!3m2!1svi!2s!4v1735812242394!5m2!1svi!2s"
+                    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <div class="p-5">
+                <h5>WEBSITE THUỘC QUYỀN CTY CỔ PHẦN Y&B</h5>
+                <p>GCNĐKKD: 0315803699 | SỞ KẾ HOẠCH VÀ ĐẦU TƯ TP. HỒ CHÍ MINH CẤP LẦN ĐẦU NGÀY 22/07/2019
+                    14D1, KHU PHỐ 1A, ĐƯỜNG QUỐC LỘ 1A, PHƯỜNG TÂN THỚI HIỆP, QUẬN 12, TP. HỒ CHÍ MINH, VIỆT NAM
+                    ĐIỆN THOẠI: 19009300 – EMAIL: WE@COCOONVIETNAM.COM</p>
+                <h5 class="mt-5">SẢN XUẤT VÀ CHỊU TRÁCH NHIỆM VỀ HÀNG HOÁ CÔNG TY TNHH NATURE STORY</h5>
+                <p>GCNĐKKD: 1101983767 / SỞ KẾ HOẠCH VÀ ĐẦU TƯ TỈNH LONG AN CẤP LẦN ĐẦU NGÀY: 15/04/2021
+                    LÔ LF24A-LF25 ĐƯỜNG SỐ 2, KHU CÔNG NGHIỆP XUYÊN Á, XÃ MỸ HẠNH BẮC, HUYỆN ĐỨC HÒA, TỈNH LONG AN, VIỆT
+                    NAM
+                    ĐIỆN THOẠI: 19009300 – EMAIL: WE@COCOONVIETNAM.COM</p>
+                <img class="mt-2" src="https://cocoonvietnam.com/_nuxt/img/ministry-of-industry-n-trade.199a108.png"
+                    width="20%" alt="">
+                <p style="margin-top: 20px; color:rgb(170, 166, 166);"> © 2024 Cocoon Vietnam. All rights reserved. </p>
+            </div>
+        </div>
+    </footer>
+</body>
