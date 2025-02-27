@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tin Tức</title>
+    <!--bootstrap CDN-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <!--icon bootstrap-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!--font awesome icon-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <!--Google font--> <!--Lấy font online-->
+    <link href="https://fonts.googleapis.com/css2?family=Sedgwick+Ave&display=swap" rel="stylesheet">
+    <!--hiệu ứng xuất hiện-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <style>
+        @font-face {
+            font-family: BarlowCondensed-Light;
+            src: url(./font/BarlowCondensed-Light.ttf);
+        }
+
+        /* button trở về đầu trang */
+        .button {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgb(84, 55, 35);
+            border: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0px 0px 0px 4px rgba(180, 160, 255, 0.253);
+            cursor: pointer;
+            transition-duration: 0.3s;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .svgIcon {
+            width: 12px;
+            transition-duration: 0.3s;
+        }
+
+        .svgIcon path {
+            fill: white;
+        }
+
+        .button:hover {
+            width: 140px;
+            border-radius: 50px;
+            transition-duration: 0.3s;
+            background-color: rgb(45, 72, 45);
+            align-items: center;
+        }
+
+        .button:hover .svgIcon {
+            /* width: 20px; */
+            transition-duration: 0.3s;
+            transform: translateY(-200%);
+        }
+
+        .button::before {
+            position: absolute;
+            bottom: -20px;
+            content: "Back to Top";
+            color: white;
+            /* transition-duration: .3s; */
+            font-size: 0px;
+        }
+
+        .button:hover::before {
+            font-size: 13px;
+            opacity: 1;
+            bottom: unset;
+            /* transform: translateY(-30px); */
+            transition-duration: 0.3s;
+        }
+
+        .body {
+            background-color: rgb(250, 245, 237);
+        }
+
+        /* Thanh thông báo */
+        .thongbao {
+            margin-bottom: 0px;
+            text-align: center;
+            background-color: rgb(35, 33, 30);
+            padding: 10px;
+            color: white;
+            font-size: 14px;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: rgb(250, 245, 237);
+        }
+
+        /* Chữ "TIN TỨC" */
+        .chuTinTuc {
+            text-align: center;
+            font-size: 55px;
+            font-weight: 700;
+            font-family: BarlowCondensed-Light;
+            padding-top: 40px;
+        }
+
+        /* Tin tức */
+        .TinTuc {
+            padding-top: 55px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Cột bên trái */
+        .TinTuc .Trai {
+            max-width: 700px;
+            flex: 1;
+            padding: 20px;
+        }
+
+        /* Tiêu đề bài viết */
+        .TinTuc .TinTuc1 {
+            font-family: BarlowCondensed-Light;
+            font-size: 50px;
+            color: rgb(77, 116, 45);
+        }
+
+        /* Nội dung bài viết */
+        .TinTuc .TinTuc2 {
+            line-height: 30px;
+            font-size: 16px;
+            color: grey;
+            margin-bottom: 20px;
+        }
+
+        /* Hình ảnh bên phải */
+        .TinTuc .Phai {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .TinTuc .Phai img {
+            width: 90%;
+            height: auto;
+            max-width: 500px;
+            border-radius: 10px;
+        }
+
+        /* Nút "ĐỌC BÀI VIẾT" */
+        .Trai button {
+            padding: 15px 80px;
+            font-size: 14px;
+            letter-spacing: 2px;
+            font-weight: 600;
+            color: #000;
+            background-color: transparent;
+            border: solid 1px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: block;
+            margin: 20px auto;
+        }
+
+        .Trai button:hover {
+            background-color: rgb(77, 116, 45);
+            color: #fff;
+            transform: translateY(-5px);
+        }
+
+        /* RESPONSIVE */
+
+        /* Màn hình từ 1024px trở xuống (Tablet) */
+        @media (max-width: 1024px) {
+            .chuTinTuc {
+                font-size: 45px;
+            }
+
+            .TinTuc {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .TinTuc .Trai {
+                max-width: 90%;
+            }
+
+            .TinTuc .TinTuc1 {
+                font-size: 40px;
+            }
+
+            .TinTuc .TinTuc2 {
+                font-size: 15px;
+                line-height: 28px;
+            }
+
+            .TinTuc .Phai img {
+                max-width: 400px;
+            }
+        }
+
+        /* Màn hình từ 768px trở xuống (Mobile) */
+        @media (max-width: 768px) {
+            .chuTinTuc {
+                font-size: 35px;
+                padding-top: 30px;
+            }
+
+            .TinTuc .Trai {
+                max-width: 100%;
+                padding: 10px;
+            }
+
+            .TinTuc .TinTuc1 {
+                font-size: 30px;
+            }
+
+            .TinTuc .TinTuc2 {
+                font-size: 14px;
+                line-height: 25px;
+            }
+
+            .Trai button {
+                padding: 12px 30px;
+                font-size: 12px;
+            }
+
+            .TinTuc .Phai img {
+                max-width: 300px;
+            }
+        }
+
+        /* Màn hình dưới 480px (Điện thoại nhỏ) */
+        @media (max-width: 480px) {
+            .chuTinTuc {
+                font-size: 30px;
+                padding-top: 20px;
+            }
+
+            .TinTuc .TinTuc1 {
+                font-size: 24px;
+            }
+
+            .TinTuc .TinTuc2 {
+                font-size: 13px;
+                line-height: 22px;
+            }
+
+            .Trai button {
+                padding: 10px 20px;
+                font-size: 10px;
+            }
+
+            .TinTuc .Phai img {
+                max-width: 250px;
+            }
+        }
+
+
+        /* Chữ Làm Đẹp */
+        .chuLamDep {
+            font-size: 40px;
+            font-family: BarlowCondensed-Light;
+            /* Căn giữa trên mobile */
+            margin-bottom: 20px;
+            margin-top: 40px;
+            margin-left: 22px;
+        }
+
+        /* Container d-flex */
+        .d-flex {
+            display: flex;
+            flex-wrap: wrap;
+            /* Cho phép xuống hàng khi không đủ chỗ */
+            justify-content: center;
+            /* Căn giữa khi xuống hàng */
+        }
+
+        /* Card */
+        .card {
+            width: 400px;
+            background-color: rgb(250, 245, 237);
+            margin-bottom: 20px;
+            /* Tạo khoảng cách giữa các card */
+        }
+
+        /* Ảnh trong Card */
+        .card img {
+            width: 400px;
+            /* Giữ nguyên kích thước ảnh */
+            height: 400px;
+            /* Đảm bảo các ảnh bằng nhau */
+            object-fit: cover;
+            /* Đảm bảo ảnh không bị méo */
+        }
+
+        /* Tiêu đề trong card */
+        .card .card-title {
+            font-family: BarlowCondensed-Light;
+            font-size: 20px;
+        }
+
+        /* Nội dung trong card */
+        .card .card-text {
+            font-size: 18px;
+            padding: 5px 0;
+        }
+
+        .card .card-text:hover {
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        /* Responsive cho màn hình nhỏ hơn 768px (Tablet và Điện thoại) */
+        @media screen and (max-width: 768px) {
+            .card {
+                width: 100%;
+                /* Card chiếm toàn bộ chiều rộng */
+                max-width: 400px;
+            }
+
+            .card img {
+                width: 400px;
+                height: 400px;
+            }
+
+            .card .card-title {
+                font-size: 18px;
+            }
+
+            .card .card-text {
+                font-size: 16px;
+            }
+        }
+
+        /* Responsive cho màn hình nhỏ hơn 480px (Điện thoại) */
+        @media screen and (max-width: 480px) {
+            .chuLamDep {
+                font-size: 30px;
+                /* Giảm kích thước chữ */
+            }
+
+            .card {
+                width: 100%;
+                max-width: 400px;
+                /* Giữ nguyên kích thước card */
+            }
+
+            .card img {
+                width: 400px;
+                height: 400px;
+            }
+
+            .card .card-title {
+                font-size: 16px;
+            }
+
+            .card .card-text {
+                font-size: 14px;
+            }
+        }
+
+
+        /* 100% thuần chay */
+        .marquee {
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+            background-color: rgb(250, 245, 237);
+        }
+
+        .marquee__children {
+            display: flex;
+            animation: marquee-animation 10s linear infinite;
+        }
+
+        @keyframes marquee-animation {
+            from {
+                transform: translateX(0%);
+            }
+
+            to {
+                transform: translateX(-100%);
+            }
+        }
+
+        /* Footer */
+        footer {
+            background-color: rgb(35, 33, 30);
+            color: rgb(220, 198, 128);
+            padding: 35px;
+            font-size: 15px;
+        }
+
+        /* Đảm bảo footer nội dung không bị tràn trên màn hình nhỏ */
+        footer .d-flex {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        /* Đảm bảo phần iframe có thể co giãn khi màn hình nhỏ */
+        footer iframe {
+            width: 105%;
+            height: 400px;
+            /* Giảm chiều cao iframe trên màn hình nhỏ */
+            border: 0;
+        }
+
+        /* Nội dung bên phải (text và hình ảnh) */
+        footer .p-5 {
+            flex: 1;
+            padding-left: 20px;
+        }
+
+        /* Điều chỉnh ảnh trong footer để phù hợp với kích thước màn hình nhỏ */
+        footer img {
+            width: 100%;
+            max-width: 150px;
+            /* Giới hạn kích thước ảnh khi cần thiết */
+            height: auto;
+        }
+
+        /* Chỉnh lại font size và padding khi màn hình nhỏ */
+        @media (max-width: 768px) {
+            footer {
+                padding: 20px;
+                font-size: 14px;
+                /* Giảm font-size */
+            }
+
+            footer .d-flex {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            footer .p-5 {
+                padding-left: 0;
+                text-align: center;
+            }
+
+            footer iframe {
+                height: 250px;
+                /* Giảm chiều cao iframe trên màn hình nhỏ */
+            }
+        }
+
+        @media (max-width: 480px) {
+            footer {
+                padding: 15px;
+                font-size: 12px;
+                /* Giảm font-size thêm */
+            }
+
+            footer iframe {
+                height: 200px;
+                /* Giảm chiều cao iframe thêm */
+            }
+
+            footer img {
+                max-width: 120px;
+                /* Giảm kích thước ảnh trên màn hình cực nhỏ */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <a name="MinhNguyen"></a> <!--tạo 1 liên kết rỗng, tạo tên, để bấm vào máy bay trang cuộn lên đây-->
+    <!--Thanh Thông Báo-->
+    <p class="thongbao">Tận hưởng giao hàng miễn phí toàn quốc với hóa đơn từ 99.000đ <i
+            class="fa-solid fa-truck-fast ms-2"></i> </p>
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg p-3">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><img src="https://apea.asia/wp-content/uploads/2021/11/cocoon-logo-ib2.png"
+                    width="130px" alt=""></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="Index.html">Trang Chủ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="SanPham.html">Sản Phẩm</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="ThuongHieu.html">Cam Kết</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="KhuyenMai.html">Khuyến Mãi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="TinTuc.html">Tin Tức</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="DangNhap.html"><i class="fa-solid fa-user"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <hr class="p-0 m-0">
+    <div class="body">
+        <!-- Chữ Tin Tức -->
+        <p class="chuTinTuc animate__animated animate__bounceInDown">TIN TỨC</p>
+        <!-- Tin Tức(Cùng CC Sống Xanh) -->
+        <div class="container">
+            <div class="d-flex TinTuc">
+                <div class="Trai me-5" style="max-width: 700px;">
+                    <p class="TinTuc1"><i>Chương trình "Cùng Cocoon Sống Xanh Mỗi Ngày năm 2024"</i></p>
+                    <p class="TinTuc2">Chương trình Thu Hồi Vỏ Chai Cũ được Cocoon khởi xướng từ tháng 4/2021 đã thu hút
+                        được sự
+                        tham gia nhiệt
+                        tình từ khách hàng, đặc biệt qua hình thức online. Đây không chỉ là nỗ lực của Cocoon trong việc
+                        giảm
+                        thiểu rác thải nhựa mà còn là lời cam kết mạnh mẽ hướng đến một môi trường bền vững. Để tăng
+                        cường
+                        tính
+                        thuận tiện cho khách hàng và mở rộng quy mô chương trình, Cocoon đã quyết định đưa hoạt động này
+                        đến
+                        gần
+                        hơn với mọi người.</p>
+                    <button
+                        onclick="window.open('https:/cocoonvietnam.com/bai-viet/chuong-trinh-cung-cocoon-song-xanh-moi-ngay-nam-2024');">ĐỌC
+                        BÀI
+                        VIẾT</i> <i class="fa-solid fa-arrow-right"></i> </button>
+                    <img src="https://vn-test-11.slatic.net/shop/3755ea4d00156cb035e4e7514a8e9141.png"
+                        class="w-100 mt-5">
+                </div>
+                <div class="Phai">
+                    <img src="https://scontent.fsgn2-9.fna.fbcdn.net/v/t39.30808-6/479907679_647232340997538_6951816053737036683_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=127cfc&_nc_ohc=oBTtY2BGVU4Q7kNvgGoGFD6&_nc_oc=AdixJnHJcJeXkVY7Vn0SwoBS3-erZPr39f5IOmeXfBPqpv4Nww52Yl4zw4_FnceK5A3SNnOH8ljav54Cpo8TDigq&_nc_zt=23&_nc_ht=scontent.fsgn2-9.fna&_nc_gid=A5gk9cj_kUY8sxUgASEANf6&oh=00_AYDQ5vgtot40Ki7k2ORmIDNuw-1ZiJzvBXeMDHuS4OOKzA&oe=67BD4A6C"
+                        alt="">
+                </div>
+            </div>
+        </div>
+        <!-- Tin Tức(Làm đẹp) -->
+        <div class="container">
+            <p class="chuLamDep">LÀM ĐẸP</p>
+            <div class="d-flex">
+                <!-- 1 -->
+                <div class="card me-4">
+                    <img src="https://image.cocoonvietnam.com/uploads/z4727571374255_78089ff78f6258b59cbb86f217a6e73e_2e06a2ea90.jpg"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Làm Đẹp | <span style="color: green; font-size: 17px;">1/10/2024</span>
+                        </h5>
+                        <p class="card-text"
+                            onclick="window.open('https:/cocoonvietnam.com/bai-viet/vai-tip-giup-ban-tan-huong-tron-ven-tung-giay-phut-lam-sach-da-chet-tren-co-the-cung-ca-phe-dak-lak-1');">
+                            Vài “tip” giúp bạn tận hưởng trọn vẹn từng giây phút làm sạch da chết trên
+                            cơ
+                            thể cùng Cà phê Đắk Lắk</p>
+                    </div>
+                </div>
+                <!-- 2 -->
+                <div class="card me-4">
+                    <img src="https://scontent.fsgn5-14.fna.fbcdn.net/v/t39.30808-6/476837959_643314908055948_5208030644611571007_n.jpg?stp=dst-jpg_p526x296_tt6&_nc_cat=101&ccb=1-7&_nc_sid=833d8c&_nc_ohc=xxob-PMePGMQ7kNvgHjmhVB&_nc_oc=Adj_CfsuG-A2gvGqgXkGB2W8f3PxeIf1kHzso5fIIdCf3zqywpZPr8R1d75XOEhIZj4&_nc_zt=23&_nc_ht=scontent.fsgn5-14.fna&_nc_gid=AQuLuHvlPdlduix_fJl9xJw&oh=00_AYAGnpa5hPhvqZkY4iJO0nqVPog7a317y5P8CdLwu-4g0A&oe=67BDFB6D"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Làm Đẹp | <span style="color: green; font-size: 17px;">1/2/2025</span>
+                        </h5>
+                        <p class="card-text"
+                            onclick="window.open('https:/cocoonvietnam.com/bai-viet/ban-co-biet-loai-dong-vat-nao-bi-lam-dung-nhieu-nhat-o-viet-nam');">
+                            Gội đầu bao nhiêu lần trong ngày, trong tuần là đủ. Hướng dẫn gội đầu đúng cách cùng bộ gội
+                            xả và dưỡng đến từ Cocoon</p>
+                    </div>
+                </div>
+                <!-- 3 -->
+                <div class="card">
+                    <img src="https://quangcaongoaitroi.com/wp-content/uploads/2023/11/Unique-OOH-my-pham-Cocoon-quang-cao-man-hinh-LED-2.jpg"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Làm Đẹp | <span style="color: green; font-size: 17px;">21/10/2024</span>
+                        </h5>
+                        <p class="card-text"
+                            onclick="window.open('https:/cocoonvietnam.com/bai-viet/ban-co-biet-loai-dong-vat-nao-bi-lam-dung-nhieu-nhat-o-viet-nam');">
+                            Giống như các loại da khác, da dầu sẽ đạt được trạng thái khỏe mạnh nếu
+                            ăn uống đúng cách. Da dầu, mụn sẽ “ăn chay” như thế nào?</p>
+                    </div>
+                </div>
+            </div>
+            <!-- TT (Đời Sống) -->
+            <p class="chuLamDep mt-5">ĐỜI SỐNG</p>
+            <div class="d-flex">
+                <!-- 1 -->
+                <div class="card me-4">
+                    <img src="https://cdn.tuoitre.vn/thumb_w/480/2022/12/6/photo-1-16703209714241081581293.jpg"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Đời Sống | <span style="color: green; font-size: 17px;">1/3/2025</span>
+                        </h5>
+                        <p class="card-text"
+                            onclick="window.open('https:/cocoonvietnam.com/bai-viet/vai-tip-giup-ban-tan-huong-tron-ven-tung-giay-phut-lam-sach-da-chet-tren-co-the-cung-ca-phe-dak-lak-1');">
+                            Chung tay chấm dứt nạn cưỡi Voi cùng tổ chức động vật Châu Á AAF cứu hộ và bảo tồn động vật
+                        </p>
+                    </div>
+                </div>
+                <!-- 2 -->
+                <div class="card me-4">
+                    <img src="https://cdn.tuoitre.vn/thumb_w/480/2022/1/12/photo-1-1641960081739339345211.jpg"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Đời Sống | <span style="color: green; font-size: 17px;">16/7/2024</span>
+                        </h5>
+                        <p class="card-text"
+                            onclick="window.open('https:/cocoonvietnam.com/bai-viet/ban-co-biet-loai-dong-vat-nao-bi-lam-dung-nhieu-nhat-o-viet-nam');">
+                            Chung tay bảo vệ loài Gấu cùng tổ chức động vật Châu Á AAF cứu hộ và bảo tồn động vật</p>
+                    </div>
+                </div>
+                <!-- 3 -->
+                <div class="card">
+                    <img src="https://image.cocoonvietnam.com/uploads/z5021305687275_931328c9693764413fc38e1b7b60b777_06b83c2262.jpg"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Đời Sống | <span style="color: green; font-size: 17px;">1/10/2024</span>
+                        </h5>
+                        <p class="card-text"
+                            onclick="window.open('https:/cocoonvietnam.com/bai-viet/ban-co-biet-loai-dong-vat-nao-bi-lam-dung-nhieu-nhat-o-viet-nam');">
+                            Chung tay cứu trợ chó mèo lang thang cùng tổ chức động vật Châu Á AAF cứu hộ và bảo tồn động
+                            vật</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--100% thuần chay-->
+        <div class="overflow-hidden relative marquee border-b border-secondary-light3 marquee_home p-5">
+            <div class="flex flex-auto marquee__children h-10 2xl:h-16" style="transform: translate(-50%, 0%);">
+                <div class="flex-shrink-0 h-full marquee__child"
+                    style="transform: translate(-97.01%, 0%) translate3d(0px, 0px, 0px);"><img
+                        src="https://image.cocoonvietnam.com/uploads/home_marquee_b3a3a85ad5.svg"
+                        class="h-full max-w-none ml-12 lg:ml-20"></div>
+                <div class="flex-shrink-0 h-full marquee__child"
+                    style="transform: translate(-97.01%, 0%) translate3d(0px, 0px, 0px);"><img
+                        src="https://image.cocoonvietnam.com/uploads/home_marquee_b3a3a85ad5.svg"
+                        class="h-full max-w-none ml-12 lg:ml-20"></div>
+                <div class="flex-shrink-0 h-full marquee__child"
+                    style="transform: translate(-97.01%, 0%) translate3d(0px, 0px, 0px);"><img
+                        src="https://image.cocoonvietnam.com/uploads/home_marquee_b3a3a85ad5.svg"
+                        class="h-full max-w-none ml-12 lg:ml-20"></div>
+                <div class="flex-shrink-0 h-full marquee__child"
+                    style="transform: translate(-97.01%, 0%) translate3d(0px, 0px, 0px);"><img
+                        src="https://image.cocoonvietnam.com/uploads/home_marquee_b3a3a85ad5.svg"
+                        class="h-full max-w-none ml-12 lg:ml-20"></div>
+            </div>
+        </div>
+    </div>
+    <!-- footer -->
+    <footer>
+        <div class="d-flex">
+            <div>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d62699.18617585225!2d106.71821544863283!3d10.834320699999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175292d15df80a1%3A0x8bedb8f3773122f!2sCocoon!5e0!3m2!1svi!2s!4v1735812242394!5m2!1svi!2s"
+                    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <div class="p-5">
+                <h5>WEBSITE THUỘC QUYỀN CTY CỔ PHẦN Y&B</h5>
+                <p>GCNĐKKD: 0315803699 | SỞ KẾ HOẠCH VÀ ĐẦU TƯ TP. HỒ CHÍ MINH CẤP LẦN ĐẦU NGÀY 22/07/2019
+                    14D1, KHU PHỐ 1A, ĐƯỜNG QUỐC LỘ 1A, PHƯỜNG TÂN THỚI HIỆP, QUẬN 12, TP. HỒ CHÍ MINH, VIỆT NAM
+                    ĐIỆN THOẠI: 19009300 – EMAIL: WE@COCOONVIETNAM.COM</p>
+                <h5 class="mt-5">SẢN XUẤT VÀ CHỊU TRÁCH NHIỆM VỀ HÀNG HOÁ CÔNG TY TNHH NATURE STORY</h5>
+                <p>GCNĐKKD: 1101983767 / SỞ KẾ HOẠCH VÀ ĐẦU TƯ TỈNH LONG AN CẤP LẦN ĐẦU NGÀY: 15/04/2021
+                    LÔ LF24A-LF25 ĐƯỜNG SỐ 2, KHU CÔNG NGHIỆP XUYÊN Á, XÃ MỸ HẠNH BẮC, HUYỆN ĐỨC HÒA, TỈNH LONG AN, VIỆT
+                    NAM
+                    ĐIỆN THOẠI: 19009300 – EMAIL: WE@COCOONVIETNAM.COM</p>
+                <img class="mt-2" src="https://cocoonvietnam.com/_nuxt/img/ministry-of-industry-n-trade.199a108.png"
+                    width="20%" alt="">
+                <p style="margin-top: 20px; color:rgb(170, 166, 166);"> © 2024 Cocoon Vietnam. All rights reserved. </p>
+            </div>
+        </div>
+    </footer>
+    <!--icon (nút để bấm vào cuộn về đầu trang)-->
+    <a href="#MinhNguyen" style="position: fixed; right: 11px; bottom: 11px;">
+        <button class="button">
+            <svg class="svgIcon" viewBox="0 0 384 512">
+                <path
+                    d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z">
+                </path>
+            </svg>
+        </button>
+    </a>
+</body>
+
+</html>
